@@ -2,14 +2,13 @@ package codetainer
 
 import (
 	"encoding/json"
+	"github.com/dustin/go-humanize"
+	"github.com/gorilla/sessions"
+	"github.com/gorilla/websocket"
 	"io/ioutil"
 	"net"
 	"net/http"
 	"text/template"
-
-	"github.com/dustin/go-humanize"
-	"github.com/gorilla/sessions"
-	"github.com/gorilla/websocket"
 )
 
 var upgrader = &websocket.Upgrader{ReadBufferSize: 1024, WriteBufferSize: 1024}
