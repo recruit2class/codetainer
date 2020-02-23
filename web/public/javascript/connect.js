@@ -320,7 +320,7 @@ Codetainer = {
 
 
     var host = location.hostname + ":" + location.port;
-    var wsUri = "ws://" + host + "/api/v1/codetainer/" + container + 
+    var wsUri = "wss://" + host + "/api/v1/codetainer/" + container +
     "/attach";
 
     var websocket = new WebSocket(wsUri);

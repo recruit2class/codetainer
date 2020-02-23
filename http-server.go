@@ -95,6 +95,9 @@ func (f handlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	var ws *websocket.Conn
 
 	if strings.Contains(r.URL.String(), "/attach") {
+		// Deactivate the origin check
+		// todo: Perform an actual origin check to ensure the source is correct
+		upgrader.CheckOrigin = func(r *http.Request) bool { return true }
 		ws, err = upgrader.Upgrade(w, r, nil)
 		if err != nil {
 			Log.Error("Unable to upgrade websocket connection:", err)
