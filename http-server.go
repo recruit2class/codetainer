@@ -43,17 +43,18 @@ func StartServer() {
 
 	r.Handle("/", handlerFunc(RouteIndex))
 	// API v1
-	r.Handle("/api/v1/codetainer/", handlerFunc(RouteApiV1Codetainer))
-	r.Handle("/api/v1/codetainer/{id}", handlerFunc(RouteApiV1CodetainerId))
+	// Removed endpoints we dont want
+	//r.Handle("/api/v1/codetainer/", handlerFunc(RouteApiV1Codetainer))
+	//r.Handle("/api/v1/codetainer/{id}", handlerFunc(RouteApiV1CodetainerId))
 	r.Handle("/api/v1/codetainer/{id}/view", handlerFunc(RouteApiV1CodetainerView))
 	r.Handle("/api/v1/codetainer/{id}/tty", handlerFunc(RouteApiV1CodetainerTTY))
-	r.Handle("/api/v1/codetainer/{id}/send", handlerFunc(RouteApiV1CodetainerSend))
+	//r.Handle("/api/v1/codetainer/{id}/send", handlerFunc(RouteApiV1CodetainerSend))
 	r.Handle("/api/v1/codetainer/{id}/attach", handlerFunc(RouteApiV1CodetainerAttach))
 	r.Handle("/api/v1/codetainer/{id}/start", handlerFunc(RouteApiV1CodetainerStart))
-	r.Handle("/api/v1/codetainer/{id}/stop", handlerFunc(RouteApiV1CodetainerStop))
-	r.Handle("/api/v1/codetainer/{id}/file", handlerFunc(RouteApiV1CodetainerFile))
-	r.Handle("/api/v1/image", handlerFunc(RouteApiV1CodetainerImage))
-	r.Handle("/api/v1/codetainer/{id}/file/download", handlerFunc(RouteApiV1CodetainerFileDownload))
+	//r.Handle("/api/v1/codetainer/{id}/stop", handlerFunc(RouteApiV1CodetainerStop))
+	//r.Handle("/api/v1/codetainer/{id}/file", handlerFunc(RouteApiV1CodetainerFile))
+	//r.Handle("/api/v1/image", handlerFunc(RouteApiV1CodetainerImage))
+	//r.Handle("/api/v1/codetainer/{id}/file/download", handlerFunc(RouteApiV1CodetainerFileDownload))
 
 	http.Handle("/", r)
 

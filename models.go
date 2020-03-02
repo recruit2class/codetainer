@@ -254,20 +254,6 @@ func (codetainer *Codetainer) Stop() error {
 	return client.StopContainer(codetainer.Id, 30)
 }
 
-func (codetainer *Codetainer) Start() error {
-	client, err := GlobalConfig.GetDockerClient()
-	if err != nil {
-		return err
-	}
-
-	// TODO fetch config for codetainer
-	return client.StartContainer(codetainer.Id, &docker.HostConfig{
-		Binds: []string{
-			GlobalConfig.UtilsPath() + ":/codetainer/utils:ro",
-		},
-	})
-}
-
 func (codetainer *Codetainer) LookupByNameOrId(id string, db *Database) error {
 	codetainer.Id = id
 	if codetainer.Lookup(db) != nil {

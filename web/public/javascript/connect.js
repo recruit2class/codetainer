@@ -286,7 +286,7 @@ Codetainer = {
     });
   },
 
-  Build: function(container) {
+  Build: function(container, secure_websocket) {
     this.id = container
 
     Codetainer.Templates.Init()
@@ -320,7 +320,13 @@ Codetainer = {
 
 
     var host = location.hostname + ":" + location.port;
-    var wsUri = "wss://" + host + "/api/v1/codetainer/" + container +
+
+    protocol = "ws"
+    if (secure_websocket == true) {
+      protocol = "wss"
+    }
+
+    var wsUri = protocol + "://" + host + "/api/v1/codetainer/" + container +
     "/attach";
 
     var websocket = new WebSocket(wsUri);

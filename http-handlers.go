@@ -483,26 +483,7 @@ func RouteApiV1CodetainerStart(ctx *Context) error {
 		return jsonError(errors.New("POST only"), ctx.W)
 	}
 
-	vars := mux.Vars(ctx.R)
-	id := vars["id"]
-
-	db, err := GlobalConfig.GetDatabase()
-
-	if err != nil {
-		return jsonError(err, ctx.W)
-	}
-
 	codetainer := Codetainer{}
-	if err = codetainer.LookupByNameOrId(id, db); err != nil {
-		return jsonError(err, ctx.W)
-	}
-
-	Log.Infof("Starting codetainer: %s", codetainer.Id)
-	err = codetainer.Start()
-
-	if err != nil {
-		return jsonError(err, ctx.W)
-	}
 
 	return renderJson(CodetainerBody{
 		Codetainer: codetainer,
@@ -684,19 +665,9 @@ func RouteApiV1CodetainerAttach(ctx *Context) error {
 		return jsonError(errors.New("No websocket connection for web client: "+ctx.R.URL.String()), ctx.W)
 	}
 
-	codetainer := Codetainer{}
-	db, err := GlobalConfig.GetDatabase()
-	if err != nil {
-		return jsonError(err, ctx.W)
-	}
+	connection := &ContainerConnection{id: id, web: ctx.WS}
 
-	if err = codetainer.LookupByNameOrId(id, db); err != nil {
-		return jsonError(err, ctx.W)
-	}
-
-	connection := &ContainerConnection{id: codetainer.Id, web: ctx.WS}
-
-	err = connection.Start()
+	err := connection.Start()
 
 	if err != nil {
 		return jsonError(err, ctx.W)
@@ -713,6 +684,7 @@ func RouteApiV1CodetainerAttach(ctx *Context) error {
 func RouteApiV1CodetainerView(ctx *Context) error {
 	vars := mux.Vars(ctx.R)
 	id := vars["id"]
+	secureWebsocket := vars["secureWebsocket"]
 
 	tOnly := ctx.R.FormValue("terminal-only")
 	if id == "" {
@@ -730,5 +702,6 @@ func RouteApiV1CodetainerView(ctx *Context) error {
 		"PageIsContainerView": true,
 		"ContainerId":         id,
 		"terminalOnly":        terminalOnly,
+		"SecureWebsocket":     secureWebsocket,
 	})
 }
