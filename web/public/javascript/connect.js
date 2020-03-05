@@ -321,9 +321,9 @@ Codetainer = {
 
     var host = location.hostname + ":" + location.port;
 
-    protocol = "ws"
-    if (secure_websocket == true) {
-      protocol = "wss"
+    protocol = "ws";
+    if (secure_websocket === true) {
+      protocol = "wss";
     }
 
     var wsUri = protocol + "://" + host + "/api/v1/codetainer/" + container +
