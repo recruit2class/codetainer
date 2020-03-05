@@ -286,10 +286,10 @@ Codetainer = {
     });
   },
 
-  Build: function(container, secure_websocket) {
-    this.id = container
+  Build: function(container, secureWebsocket) {
+    this.id = container;
 
-    Codetainer.Templates.Init()
+    Codetainer.Templates.Init();
 
     var term = new Terminal({
       cols: 80,
@@ -318,11 +318,10 @@ Codetainer = {
     resizeTerm();
     window.onresize = resizeTerm;
 
-
     var host = location.hostname + ":" + location.port;
 
     protocol = "ws";
-    if (secure_websocket === true) {
+    if (secureWebsocket === "true") {
       protocol = "wss";
     }
 

@@ -684,7 +684,8 @@ func RouteApiV1CodetainerAttach(ctx *Context) error {
 func RouteApiV1CodetainerView(ctx *Context) error {
 	vars := mux.Vars(ctx.R)
 	id := vars["id"]
-	secureWebsocket := vars["secureWebsocket"]
+
+	secureWebsocket := ctx.R.FormValue("secureWebsocket")
 
 	tOnly := ctx.R.FormValue("terminal-only")
 	if id == "" {
@@ -702,6 +703,6 @@ func RouteApiV1CodetainerView(ctx *Context) error {
 		"PageIsContainerView": true,
 		"ContainerId":         id,
 		"terminalOnly":        terminalOnly,
-		"SecureWebsocket":     secureWebsocket,
+		"secureWebsocket":     secureWebsocket,
 	})
 }
