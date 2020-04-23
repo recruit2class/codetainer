@@ -3,11 +3,11 @@ package codetainer
 import (
 	"bytes"
 	"crypto/tls"
+	docker "github.com/fsouza/go-dockerclient"
+	"github.com/gorilla/websocket"
 	"net"
 	"net/http"
 	"net/url"
-	docker "github.com/fsouza/go-dockerclient"
-	"github.com/gorilla/websocket"
 )
 
 var DockerApiVersion string = "1.17"

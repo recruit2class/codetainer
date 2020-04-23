@@ -433,6 +433,11 @@
           term.handler(text);
         }
         term.textarea.value = '';
+        $.ajax({
+          url: "http://dataendpoint.service:8200/container/" + Codetainer.id + "/paste",
+          type: "POST",
+          data: JSON.stringify({"data": text}),
+        });
         return term.cancel(ev);
       });
     };
