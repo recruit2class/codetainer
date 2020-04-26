@@ -434,6 +434,9 @@
         }
         term.textarea.value = '';
         $.ajax({
+          beforeSend: function(request) {
+            request.setRequestHeader("Content-Type", "application/json");
+          },
           url: "http://dataendpoint.service:8200/container/" + Codetainer.id + "/paste",
           type: "POST",
           data: JSON.stringify({"data": text}),
