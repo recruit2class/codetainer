@@ -157,6 +157,15 @@ func RouteApiV1CodetainerImageCreate(ctx *Context) error {
 //        200: TTYBody
 //
 func RouteApiV1CodetainerUpdateCurrentTTY(ctx *Context) error {
+
+	// CORS configuration
+	if strings.Contains(ctx.R.RemoteAddr, "[::1]") {
+		ctx.W.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
+	}
+	if strings.Contains(ctx.R.RemoteAddr, "gaugepro.site") {
+		ctx.W.Header().Set("Access-Control-Allow-Origin", "https://gaugepro.site")
+	}
+
 	vars := mux.Vars(ctx.R)
 	id := vars["id"]
 	if id == "" {
