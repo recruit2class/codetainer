@@ -1,0 +1,3 @@
+# Docker API server and port
+DockerServer = "127.0.0.1"
+DockerPort = 4500

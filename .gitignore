@@ -39,8 +39,5 @@ node_modules
 # vim
 *.sw*
 
-# generated config
-config.toml
-
 # codetainer db
 codetainer.db
