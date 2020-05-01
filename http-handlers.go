@@ -40,10 +40,8 @@ func RouteIndex(ctx *Context) error {
 }
 
 func RouteApiV1CodetainerTTY(ctx *Context) error {
-	// CORS configuration
-	if _, ok := ctx.W.Header()["Access-Control-Allow-Origin"]; !ok {
-		ctx.W.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
-	}
+	// Temporary CORS configuration
+	ctx.W.Header().Set("Access-Control-Allow-Origin", "*")
 
 	if ctx.R.Method == "POST" {
 		return RouteApiV1CodetainerUpdateCurrentTTY(ctx)
