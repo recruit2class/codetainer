@@ -41,15 +41,7 @@ func RouteIndex(ctx *Context) error {
 
 func RouteApiV1CodetainerTTY(ctx *Context) error {
 	// Temporary CORS configuration
-	// ctx.W.Header().Set("Access-Control-Allow-Origin", "https://gaugepro.site")
-
-	// CORS configuration
-	if strings.Contains(ctx.R.RemoteAddr, "[::1]") {
-		ctx.W.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
-	}
-	if strings.Contains(ctx.R.RemoteAddr, "gaugepro.site") {
-		ctx.W.Header().Set("Access-Control-Allow-Origin", "https://gaugepro.site")
-	}
+	ctx.W.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
 
 	if ctx.R.Method == "POST" {
 		return RouteApiV1CodetainerUpdateCurrentTTY(ctx)
@@ -674,7 +666,7 @@ func RouteApiV1CodetainerAttach(ctx *Context) error {
 	//if strings.Contains(ctx.R.RemoteAddr, "gaugepro.site") {
 	//	ctx.W.Header().Set("Access-Control-Allow-Origin", "https://gaugepro.site")
 	//}
-	ctx.W.Header().Set("Access-Control-Allow-Origin", "https://gaugepro.site")
+	ctx.W.Header().Set("Access-Control-Allow-Origin", "http://localhost:8080")
 
 	vars := mux.Vars(ctx.R)
 	id := vars["id"]
