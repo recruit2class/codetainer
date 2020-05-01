@@ -40,6 +40,9 @@ func RouteIndex(ctx *Context) error {
 }
 
 func RouteApiV1CodetainerTTY(ctx *Context) error {
+	// Temporary CORS configuration
+	ctx.W.Header().Set("Access-Control-Allow-Origin", "https://gaugepro.site")
+
 	if ctx.R.Method == "POST" {
 		return RouteApiV1CodetainerUpdateCurrentTTY(ctx)
 	} else {
